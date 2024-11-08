@@ -33,6 +33,7 @@ public class ExampleMethodReferences {
 
         Supplier<ArrayList<String>> listSupplier = ArrayList::new;
         ArrayList<String> names = new ArrayList<>();
+
         names.add("John");
         names.add("Jane");
         names.add("Bob");

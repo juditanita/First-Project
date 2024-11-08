@@ -17,6 +17,7 @@ public class StreamTerminal {
         // foreach
         namesStream.forEach(System.out::println);
 
+
         //count need to creat the stream again
         long nrOfItem = names.size();
         System.out.println(nrOfItem);
