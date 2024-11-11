@@ -7,7 +7,7 @@ public class Wordly {
     private String word;
     private int maxAttents;
 
-    public String[] guessedWordsArray;
+
 
     Wordly(String word, int maxAttents) {
         this.word = word;
@@ -41,14 +41,7 @@ public class Wordly {
         }
     }
 
-    public boolean constainsStars(String[] arr){
-        for(int i=0; i<arr.length; i++){
-            if(arr[i].equals("*")){
-                return true;
-            }
-        }
-        return false;
-    }
+
 
     public void startGame(){
 
@@ -60,11 +53,16 @@ public class Wordly {
 
 
     public void play(){
-
         this.startGame();
+        boolean isWinner =false;
         Scanner sc = new Scanner(System.in);
 
+
+
         String letter;
+
+      String[] guessedWordsArray= new String[this.getWord().length()];
+
 
         do {
             System.out.println("Enter a letter:");
@@ -76,34 +74,34 @@ public class Wordly {
                 letter = sc.nextLine().toLowerCase();
             }
 
-            String[] wordsArray = getWord().split("");
+            String[] wordsArray = this.word.toLowerCase().split("");
 
-            int wordsArrayLength = wordsArray.length;
-            this.guessedWordsArray = new String[wordsArrayLength];
-
-            for (int i = 0; i < wordsArrayLength; i++) {
-                if (this.guessedWordsArray[i] == null) {
+            for (int i = 0; i < wordsArray.length; i++) {
+                if (guessedWordsArray[i] == null || guessedWordsArray[i].equals("*")) {
                     if (wordsArray[i].equals(letter)) {
-                        this.guessedWordsArray[i] = letter;
+                        guessedWordsArray[i] = letter;
                     } else {
-                        this.guessedWordsArray[i] = "*";
+                        guessedWordsArray[i] = "*";
                     }
                 }
             }
 
             String guessedWord = String.join("", guessedWordsArray);
+            if(this.word.equals(guessedWord)){
+isWinner = true;
+            }
             System.out.println(guessedWord);
 
-            if (this.getWord().equals(guessedWord)) {
+            if (String.join("", this.word.split("")).equals(guessedWord)) {
                 System.out.println("You are a winner!");
                 break;
             }
 
-            this.setMaxAttents(this.getMaxAttents() - 1);
+            setMaxAttents(getMaxAttents() - 1);
             messages();
-        } while (this.getMaxAttents() > 0);
+        } while (getMaxAttents() > 0 || isWinner);
 
-        if (this.getMaxAttents() == 0) {
+        if (getMaxAttents() == 0) {
             System.out.println("You have lost the game!");
         }
 
