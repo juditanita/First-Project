@@ -6,7 +6,8 @@ public class Wordly {
 
     private String word;
     private int maxAttents;
-    boolean rightLetterFound = false;
+
+    public String[] guessedWordsArray;
 
     Wordly(String word, int maxAttents) {
         this.word = word;
@@ -55,73 +56,62 @@ public class Wordly {
         System.out.println("Guess the letter of the word");
     }
 
+
+
+
     public void play(){
 
         this.startGame();
         Scanner sc = new Scanner(System.in);
 
-        String letter = sc.nextLine();
-        letter = letter.toLowerCase();
-        int letterLength = letter.length();
+        String letter;
 
-        String[] wordsArray = getWord().split("");
+        do {
+            System.out.println("Enter a letter:");
+            letter = sc.nextLine().toLowerCase();
+            int letterLength = letter.length();
 
-        int wordsArrayLength = wordsArray.length;
-        System.out.println(wordsArrayLength);
+            if (letterLength > 1) {
+                System.out.println("Letter should be one character.");
+                letter = sc.nextLine().toLowerCase();
+            }
 
-        String[] guessedWordsArray = new String[wordsArrayLength];
+            String[] wordsArray = getWord().split("");
 
+            int wordsArrayLength = wordsArray.length;
+            this.guessedWordsArray = new String[wordsArrayLength];
 
+            for (int i = 0; i < wordsArrayLength; i++) {
+                if (this.guessedWordsArray[i] == null) {
+                    if (wordsArray[i].equals(letter)) {
+                        this.guessedWordsArray[i] = letter;
+                    } else {
+                        this.guessedWordsArray[i] = "*";
+                    }
+                }
+            }
 
+            String guessedWord = String.join("", guessedWordsArray);
+            System.out.println(guessedWord);
 
+            if (this.getWord().equals(guessedWord)) {
+                System.out.println("You are a winner!");
+                break;
+            }
 
-        if(letterLength>1 || letterLength == 0){
-            System.out.println("Letter should be one character");
-            letter = sc.nextLine();
+            this.setMaxAttents(this.getMaxAttents() - 1);
+            messages();
+        } while (this.getMaxAttents() > 0);
+
+        if (this.getMaxAttents() == 0) {
+            System.out.println("You have lost the game!");
         }
 
-        for(int i = 0; i<wordsArrayLength; i++){
-
-         if(guessedWordsArray[i] == null || guessedWordsArray[i].equals("*")){
-
-           if(wordsArray[i].equals(letter)){
-                   guessedWordsArray[i] = letter;
-               }
-        else{
-                guessedWordsArray[i] = "*";
-        }
-
-
+        sc.close();
     }
-       }
-        String guessedWord = guessedWord=String.join("", guessedWordsArray);
-
-
-       System.out.println(guessedWord);
-        if(this.getWord().equals(guessedWord)){
-            System.out.println("You are a winner");
-        }
 
 
 
-        while (this.getMaxAttents() >0){
-            play();
-            this.setMaxAttents(this.getMaxAttents()-1);
-
-        }
-
-
-
-
-
-
-//        if( constainsStars(guessedWordsArray)){
-//
-//            play();
-//        };
-
-sc.close();
-    }
 
 
 
