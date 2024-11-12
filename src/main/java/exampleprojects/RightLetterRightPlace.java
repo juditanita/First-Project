@@ -13,11 +13,11 @@ public class RightLetterRightPlace {
     }
 
     public String getWord() {
-        return word;
+        return word.toLowerCase();
     }
 
     public void setWord(String word) {
-        this.word = word.toLowerCase();
+        this.word = word;
     }
 
     public int getAttempts() {
@@ -37,28 +37,35 @@ public class RightLetterRightPlace {
         String[] givenWordArray=this.getWord().split("");
 
 
-       Scanner sc = new Scanner(System.in);
-       String guessedWord = sc.nextLine();
-       String[] newWordArr = new String[givenWordArray.length];
-       int position =0;
-       boolean isGameOver = false;
-       String  newWord = String.join("", newWordArr);
+        Scanner sc = new Scanner(System.in);
+        String guessedWord = sc.nextLine();
+        String[] newWordArr = new String[givenWordArray.length];
+        int position =0;
+        boolean isGameOver = false;
+        String  newWord = String.join("", newWordArr);
 
 
 
+        if(guessedWord.length() > this.word.length()){
 
-
-
-       if(guessedWord.length() > this.word.length()){
-
-           System.out.println("Guess the " + this.getWord().length() + " letters word");
-           guessedWord = sc.nextLine().toLowerCase();
-       }
+            System.out.println("Guess the " + this.getWord().length() + " letters word");
+            guessedWord = sc.nextLine().toLowerCase();
+        }
 
         String[] guessedWordArray = guessedWord.toLowerCase().split("");
 
 
-      // String[] guessedWordArray = guessedWord.split("");
+        // String[] guessedWordArray = guessedWord.split("");
+
+
+
+      while(!isGameOver){
+
+          if(newWord.equals(this.getWord())){
+              isGameOver = true;
+          }
+
+          else{
 
         for (int i=0; i< givenWordArray.length; i++){
             String c =  givenWordArray[i];
@@ -73,6 +80,7 @@ public class RightLetterRightPlace {
                         //newWordArr[j] = "*";
                         position = i+1;
                         System.out.println(c+ " - " + position + " In the right place");
+                        break;
 
                     }
                     else{
@@ -101,38 +109,32 @@ public class RightLetterRightPlace {
 
         }
 
+//              newWord = String.join("", newWordArr);
+//              System.out.println(newWord);
+//              System.out.println("Guess the word");
+//              guessedWord = sc.nextLine().toLowerCase();
 
-
-
-        newWord = String.join("", newWordArr);
-        System.out.println(newWord);
-
-//        if(newWord.equals(this.getWord())){
-//            isGameOver = true;
-//        }
-
-        //check to array, if they contains the same letters and in the same
-
-
-        while(!isGameOver){
-            System.out.println("Guess the " + this.getWord().length() + " letters word");
+          }
+          newWord = String.join("", newWordArr);
+          System.out.println(newWord);
+          System.out.println("Guess the word");
+          guessedWord = sc.nextLine().toLowerCase();
+      }
 
 
 
 
-            guessedWord = sc.nextLine().toLowerCase();
-            
-
-            if(newWord.equals(this.getWord())){
-                isGameOver = true;
-            }
-        }
 
 
 
 
-        }
+
+
+
+
 
 
     }
 
+
+}
