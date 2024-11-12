@@ -6,11 +6,50 @@ public class WordleGames {
 
     public static void main(String[] args) {
 
-      Wordly wordGame = new Wordly("Hello",8);
+      //Wordly wordGame = new Wordly("Hello",8);
 
-      wordGame.play();
+     // wordGame.play();
 
+        RightLetterRightPlace word = new RightLetterRightPlace("Weary", 5);
+        word.play();
+
+
+
+
+
+
+
+
+
+
+  //check if the character is in the right posion and add it to the array
+
+
+
+
+
+   
+
+
+                
+
+
+
+            }
 
 
     }
-}
+            
+
+
+
+
+
+
+        
+
+        
+
+
+    
+
