@@ -38,32 +38,37 @@ public class RightLetterRightPlace {
 
 
         Scanner sc = new Scanner(System.in);
-        String guessedWord = sc.nextLine();
-        String[] newWordArr = new String[givenWordArray.length];
-        int position =0;
+
         boolean isGameOver = false;
-        String  newWord = String.join("", newWordArr);
+
+        int attemps = this.attempts;
+        while(attemps >0 || !isGameOver){
+          String[] newWordArr = new String[givenWordArray.length];
+          String  newWord = String.join("", newWordArr);
+          String guessedWord = sc.nextLine().toLowerCase();
+          String[] guessedWordArray = guessedWord.toLowerCase().split("");
+
+            attemps--;
 
 
+          if(guessedWord.length() > this.word.length()){
 
-        if(guessedWord.length() > this.word.length()){
-
-            System.out.println("Guess the " + this.getWord().length() + " letters word");
-            guessedWord = sc.nextLine().toLowerCase();
-        }
-
-        String[] guessedWordArray = guessedWord.toLowerCase().split("");
-
-
-        // String[] guessedWordArray = guessedWord.split("");
-
-
-
-      while(!isGameOver){
-
-          if(newWord.equals(this.getWord())){
-              isGameOver = true;
+              System.out.println("Guess the " + this.getWord().length() + " letters word");
+              guessedWord = sc.nextLine().toLowerCase();
           }
+
+          if(newWord.equals(this.getWord()) ||(guessedWord.equals(this.getWord())) ){
+
+              isGameOver = true;
+              System.out.println("Game over");
+              if(attemps>0){
+                  System.out.println("You have won");
+                  guessedWord = newWord;
+              }
+
+          }
+
+
 
           else{
 
@@ -72,21 +77,21 @@ public class RightLetterRightPlace {
 
 
             for(int j = 0; j<givenWordArray.length; j++){
-                this.setAttempts(this.getAttempts()+1);
+
                 if(c.equals(guessedWordArray[j])){
 
                     if(i == j){
                         newWordArr[i] = c;
                         //newWordArr[j] = "*";
-                        position = i+1;
-                        System.out.println(c+ " - " + position + " In the right place");
+
+                        System.out.println(c+ " -  In the right place");
                         break;
 
                     }
                     else{
-                        position = j+1;
+
                         newWordArr[j] = c;
-                        System.out.println(c+ " - " + position + " NOT  In the right place");
+                        System.out.println(c+ " - NOT  In the right place");
 
 
                     }
@@ -103,22 +108,19 @@ public class RightLetterRightPlace {
             if(newWordArr[i] == null){
                 newWordArr[i] = "*";
             }
-
-
-
-
         }
 
-//              newWord = String.join("", newWordArr);
-//              System.out.println(newWord);
-//              System.out.println("Guess the word");
-//              guessedWord = sc.nextLine().toLowerCase();
 
           }
           newWord = String.join("", newWordArr);
-          System.out.println(newWord);
-          System.out.println("Guess the word");
-          guessedWord = sc.nextLine().toLowerCase();
+
+          if(!isGameOver){
+              System.out.println("You have left "+ attemps + " attempts");
+              System.out.println(newWord);
+          }
+
+
+
       }
 
 
