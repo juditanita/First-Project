@@ -41,6 +41,9 @@ public class RightLetterRightPlace {
        String guessedWord = sc.nextLine();
        String[] newWordArr = new String[givenWordArray.length];
        int position =0;
+       boolean isGameOver = false;
+       String  newWord = String.join("", newWordArr);
+
 
 
 
@@ -62,12 +65,12 @@ public class RightLetterRightPlace {
 
 
             for(int j = 0; j<givenWordArray.length; j++){
-
+                this.setAttempts(this.getAttempts()+1);
                 if(c.equals(guessedWordArray[j])){
 
                     if(i == j){
                         newWordArr[i] = c;
-                        newWordArr[j] = "*";
+                        //newWordArr[j] = "*";
                         position = i+1;
                         System.out.println(c+ " - " + position + " In the right place");
 
@@ -101,13 +104,31 @@ public class RightLetterRightPlace {
 
 
 
-String  newWord = String.join("", newWordArr);
-
-
-
+        newWord = String.join("", newWordArr);
         System.out.println(newWord);
 
+//        if(newWord.equals(this.getWord())){
+//            isGameOver = true;
+//        }
+
         //check to array, if they contains the same letters and in the same
+
+
+        while(!isGameOver){
+            System.out.println("Guess the " + this.getWord().length() + " letters word");
+
+
+
+
+            guessedWord = sc.nextLine().toLowerCase();
+            
+
+            if(newWord.equals(this.getWord())){
+                isGameOver = true;
+            }
+        }
+
+
 
 
         }
