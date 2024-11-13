@@ -10,8 +10,11 @@ public class WordleGames {
 
      // wordGame.play();
 
-        RightLetterRightPlace word = new RightLetterRightPlace("Weary", 5);
-        word.play();
+       // RightLetterRightPlace word = new RightLetterRightPlace("Weary", 5);
+        //word.play();
+
+        TicTacToe ticTocToe = new TicTacToe();
+        ticTocToe.play();
 
 
 
